@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FutNews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">⚽ FutNews</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
+                   
+</li>
+                </ul>
+                <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FORMULÁRIO -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-5">
+
+                
+                <!-- ABAS -->
+<ul class="nav nav-tabs" id="abas">
+    <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#aba-login">Login</button>
+    </li>
+    <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#aba-cadastro" id="aba-cadastro-btn">Cadastro</button>
+    </li>
+</ul>
+
+                <div class="tab-content border border-top-0 p-4">
+
+                    <!-- ABA LOGIN -->
+                    <div class="tab-pane fade show active" id="aba-login">
+                        <h4 class="mb-3">Entrar</h4>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="login-email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="login-senha">
+                        </div>
+                        <button class="btn btn-success w-100" onclick="fazerLogin()">Entrar</button>
+                        <p id="msg-login" class="text-danger mt-2"></p>
+                    </div>
+
+                    <!-- ABA CADASTRO -->
+                    <div class="tab-pane fade" id="aba-cadastro">
+                        <h4 class="mb-3">Criar conta</h4>
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="cad-nome">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="cad-email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="cad-senha">
+                        </div>
+                        <button class="btn btn-success w-100" onclick="fazerCadastro()">Cadastrar</button>
+                        <p id="msg-cadastro" class="mt-2"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script/tema.js"></script>
+    <script src="../script/auth.js"></script>
+</body>
+</html>

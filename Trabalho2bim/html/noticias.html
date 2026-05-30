@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias - FutNews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">⚽ FutNews</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="noticias.html">Notícias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+                </ul>
+                <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+
+            <!-- LISTA DE NOTÍCIAS -->
+            <div class="col-12 col-md-9">
+                <h2>Notícias</h2>
+
+                <!-- BUSCA -->
+                <div class="input-group mb-4">
+                    <input type="text" class="form-control" id="campoBusca" placeholder="Buscar notícia...">
+                    <button class="btn btn-success" onclick="buscarNoticias()">Buscar</button>
+                </div>
+
+                <div class="row" id="lista-noticias">
+                    <p class="text-muted">Nenhuma notícia ainda.</p>
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="col-12 col-md-3">
+                <h5>Categorias</h5>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('')">Todas</li>
+                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('Brasileirão')">Brasileirão</li>
+                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('Champions League')">Champions League</li>
+                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('Seleção')">Seleção</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="text-center py-3 mt-5 border-top">
+        <p class="mb-0">© 2025 FutNews</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script/tema.js"></script>
+    <script src="../script/noticias.js"></script>
+</body>
+</html>

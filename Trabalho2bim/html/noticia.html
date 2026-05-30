@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícia - FutNews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
+    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">⚽ FutNews</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+                </ul>
+                <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <a href="noticias.html" class="btn btn-outline-secondary btn-sm mb-4">← Voltar</a>
+        <div id="conteudo-noticia">
+            <p class="text-muted">Carregando...</p>
+        </div>
+    </div>
+
+    <footer class="text-center py-3 mt-5 border-top">
+        <p class="mb-0">© 2025 FutNews</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script/tema.js"></script>
+    <script>
+        // Pega o id da URL
+        const params = new URLSearchParams(window.location.search);
+        const id = Number(params.get('id'));
+
+        // Busca a notícia no localStorage
+        const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+        const noticia = noticias.find(n => n.id === id);
+
+        const div = document.getElementById('conteudo-noticia');
+
+        if (!noticia) {
+            div.innerHTML = '<p class="text-danger">Notícia não encontrada.</p>';
+        } else {
+            div.innerHTML = `
+                <span class="badge bg-success mb-2">${noticia.categoria}</span>
+                <h1 class="mt-2">${noticia.titulo}</h1>
+                <hr>
+                <p class="lead">${noticia.conteudo}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
