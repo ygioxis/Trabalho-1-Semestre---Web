@@ -1,0 +1,326 @@
+/* ===== IMPORTA FONTE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+/* ===== VARIÁVEIS ===== */
+:root {
+    --azul: #1a73e8;
+    --azul-escuro: #0d47a1;
+    --fundo: #141414;
+    --fundo-card: #1e1e1e;
+    --fundo-navbar: #0a0a0a;
+    --texto: #f0f0f0;
+    --texto-fraco: #aaa;
+    --borda: #2a2a2a;
+    --destaque: #1a73e8;
+}
+
+/* ===== GERAL ===== */
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--texto);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: var(--fundo-navbar) !important;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    padding: 14px 0;
+    border-bottom: 2px solid var(--azul);
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: white !important;
+    letter-spacing: 1px;
+}
+
+.navbar-brand span {
+    color: var(--azul);
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 6px 14px !important;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(26,115,232,0.2) !important;
+    color: var(--azul) !important;
+}
+
+.btn-outline-light {
+    border-color: rgba(255,255,255,0.3) !important;
+    color: white !important;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-outline-light:hover {
+    background: rgba(255,255,255,0.1) !important;
+}
+
+/* ===== CARROSSEL ===== */
+.carousel-item img {
+    height: 420px;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+.carousel-caption {
+    bottom: 40px;
+}
+
+.carousel-caption h5 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+.carousel-caption p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+}
+
+/* ===== SEÇÃO NOTÍCIAS ===== */
+.secao-noticias {
+    background: var(--fundo);
+    padding: 40px 0;
+}
+
+.secao-noticias h2 {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: white;
+    border-left: 4px solid var(--azul);
+    padding-left: 14px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    border: none !important;
+    border-radius: 12px !important;
+    background: var(--fundo-card) !important;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    color: var(--texto) !important;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(26,115,232,0.25);
+    border: 1px solid var(--azul) !important;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: white !important;
+}
+
+.card-text {
+    color: var(--texto-fraco) !important;
+    font-size: 0.9rem;
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* ===== BADGE ===== */
+.badge.bg-success {
+    background-color: var(--azul) !important;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ===== BOTÕES ===== */
+.btn-success {
+    background-color: var(--azul) !important;
+    border-color: var(--azul) !important;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-success:hover {
+    background-color: var(--azul-escuro) !important;
+    border-color: var(--azul-escuro) !important;
+}
+
+/* ===== SIDEBAR ===== */
+.list-group-item {
+    cursor: pointer;
+    background: var(--fundo-card) !important;
+    color: var(--texto) !important;
+    border: none !important;
+    border-bottom: 1px solid var(--borda) !important;
+    font-weight: 600;
+    transition: all 0.2s;
+    padding: 12px 16px;
+}
+
+.list-group-item:hover {
+    background: var(--azul) !important;
+    color: white !important;
+    padding-left: 22px;
+}
+
+/* ===== FORMULÁRIOS ===== */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1.5px solid var(--borda);
+    background: #2a2a2a !important;
+    color: white !important;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+}
+
+.form-control::placeholder {
+    color: #666 !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 0.2rem rgba(26,115,232,0.25);
+    background: #2a2a2a !important;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 6px;
+}
+
+/* ===== ABAS LOGIN ===== */
+.nav-tabs {
+    border-bottom: 2px solid var(--borda) !important;
+}
+
+.nav-tabs .nav-link {
+    color: #aaa !important;
+    background: transparent !important;
+    border: none !important;
+    font-weight: 600;
+    padding: 10px 20px !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--azul) !important;
+    border-bottom: 2px solid var(--azul) !important;
+    background: transparent !important;
+}
+
+.tab-content {
+    background: var(--fundo-card);
+    border-color: var(--borda) !important;
+    border-radius: 0 0 12px 12px;
+}
+
+/* ===== PERFIL ===== */
+.perfil-header {
+    background: linear-gradient(135deg, #0a0a0a, #0d47a1);
+    color: white;
+    padding: 50px 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--azul);
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--azul);
+    color: white;
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 16px rgba(26,115,232,0.4);
+    border: 3px solid white;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #0a0a0a;
+    color: #666;
+    font-size: 0.9rem;
+    padding: 24px 0;
+    border-top: 2px solid var(--azul);
+}
+
+footer p {
+    color: #666;
+}
+
+/* ===== TEMA CLARO ===== */
+[data-bs-theme="light"] body {
+    background-color: #f0f2f5;
+    color: #1a1a1a;
+}
+
+[data-bs-theme="light"] .card {
+    background: white !important;
+    color: #1a1a1a !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+[data-bs-theme="light"] .card-title {
+    color: #1a1a1a !important;
+}
+
+[data-bs-theme="light"] .card-text {
+    color: #555 !important;
+}
+
+[data-bs-theme="light"] .secao-noticias {
+    background: #f0f2f5;
+}
+
+[data-bs-theme="light"] .secao-noticias h2 {
+    color: #1a1a1a;
+}
+
+[data-bs-theme="light"] .list-group-item {
+    background: white !important;
+    color: #1a1a1a !important;
+    border-bottom-color: #eee !important;
+}
+
+[data-bs-theme="light"] .form-control,
+[data-bs-theme="light"] .form-select {
+    background: white !important;
+    color: #1a1a1a !important;
+    border-color: #ddd;
+}
+
+[data-bs-theme="light"] .form-label {
+    color: #333;
+}
+
+[data-bs-theme="light"] .tab-content {
+    background: white;
+}
+
+[data-bs-theme="light"] footer {
+    background: #1a1a1a;
+}
+.carousel-caption {
+    display: none;
+}

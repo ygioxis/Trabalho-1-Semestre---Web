@@ -1,95 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="light">
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FutNews</title>
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-
-
-
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg bg-success navbar-dark">
         <div class="container">
-
-            <!-- Logo/nome do site -->
             <a class="navbar-brand fw-bold" href="index.html">⚽ FutNews</a>
-
-            <!-- Botão hamburguer (aparece só no celular) -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Links do menu -->
             <div class="collapse navbar-collapse" id="menuNav">
                 <ul class="navbar-nav me-auto">
-                   <div class="d-flex align-items-center gap-2">
-            <span class="text-white" id="nomeUsuario"></span>
-            <a href="perfil.html" class="btn btn-outline-light btn-sm" id="btnPerfil" style="display:none">Perfil</a>
-            <button class="btn btn-outline-light btn-sm" id="btnLogout" style="display:none" onclick="logout()">Sair</button>
-            <a href="login.html" class="btn btn-outline-light btn-sm" id="btnLogin">Entrar</a>
-            <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
-</div>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
                 </ul>
-                <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-white" id="nomeUsuario"></span>
+                    <a href="perfil.html" class="btn btn-outline-light btn-sm" id="btnPerfil" style="display:none">Perfil</a>
+                    <button class="btn btn-outline-light btn-sm" id="btnLogout" style="display:none" onclick="logout()">Sair</button>
+                    <a href="login.html" class="btn btn-outline-light btn-sm" id="btnLogin">Entrar</a>
+                    <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+                </div>
             </div>
-
         </div>
     </nav>
+
     <!-- CARROSSEL -->
     <div id="carrossel" class="carousel slide" data-bs-ride="carousel">
-
-    <!-- As imagens -->
-    <div class="carousel-inner">
-
-        <div class="carousel-item active">
-            <img src="https://placehold.co/1200x400/198754/white?text=Brasileirao+2025" class="d-block w-100" alt="Brasileirao">
-            <div class="carousel-caption">
-                <h5>Brasileirão 2025</h5>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://placehold.co/1200x450/198754/white?text=Brasileirao+2025" class="d-block w-100" alt="Brasileirao">
+                <div class="carousel-caption">
+                    <h5>Brasileirão 2025</h5>
+                    <p>Acompanhe todas as notícias</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://placehold.co/1200x450/0d6efd/white?text=Champions+League" class="d-block w-100" alt="Champions">
+                <div class="carousel-caption">
+                    <h5>Champions League</h5>
+                    <p>O melhor do futebol europeu</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://placehold.co/1200x450/ffc107/black?text=Selecao+Brasileira" class="d-block w-100" alt="Selecao">
+                <div class="carousel-caption">
+                    <h5>Seleção Brasileira</h5>
+                    <p>Notícias da Canarinho</p>
+                </div>
             </div>
         </div>
-
-        <div class="carousel-item">
-            <img src="https://placehold.co/1200x400/0d6efd/white?text=Champions+League" class="d-block w-100" alt="Champions">
-            <div class="carousel-caption">
-                <h5>Champions League</h5>
-            </div>
-        </div>
-
-        <div class="carousel-item">
-            <img src="https://placehold.co/1200x400/ffc107/black?text=Selecao+Brasileira" class="d-block w-100" alt="Selecao">
-            <div class="carousel-caption">
-                <h5>Seleção Brasileira</h5>
-            </div>
-        </div>
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrossel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrossel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
 
-    <!-- Botões de passar -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carrossel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carrossel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-
-</div>
-
-   <!-- NOTÍCIAS RECENTES -->
-    <div class="container mt-4">
-        <h2>Últimas Notícias</h2>
-        <div class="row mt-3" id="lista-noticias">
-            <p class="text-muted">Nenhuma notícia ainda.</p>
+  <!-- BARRA DE ÚLTIMAS NOTÍCIAS -->
+    <div style="background:#1a73e8; padding: 8px 0; overflow:hidden;">
+        <div style="display:flex; align-items:center;">
+            <span style="background:#0d47a1; color:white; padding: 4px 16px; font-weight:700; font-size:0.85rem; white-space:nowrap;">⚡ ÚLTIMAS</span>
+            <div style="overflow:hidden; flex:1;">
+                <div id="barra-noticias" style="white-space:nowrap; color:white; font-size:0.85rem; font-weight:500; animation: scroll 20s linear infinite;">
+                </div>
+            </div>
         </div>
-        <a href="noticias.html" class="btn btn-success mt-2">Ver todas</a>
     </div>
 
-    <footer class="text-center py-3 mt-5 border-top">
+    <!-- NOTÍCIA DESTAQUE -->
+    <div class="secao-noticias">
+        <div class="container py-4">
+            <h2 class="secao-titulo">⭐ DESTAQUE</h2>
+            <div id="noticia-destaque"></div>
+        </div>
+    </div>
+
+    <!-- NOTÍCIAS POR CATEGORIA -->
+    <div class="secao-noticias" style="padding-top:0">
+        <div class="container pb-4">
+
+            <h2 class="secao-titulo">🇧🇷 BRASILEIRÃO</h2>
+            <div class="row" id="noticias-brasileirao"></div>
+
+            <h2 class="secao-titulo mt-4">🏆 CHAMPIONS LEAGUE</h2>
+            <div class="row" id="noticias-champions"></div>
+
+            <h2 class="secao-titulo mt-4">🌍 SELEÇÃO</h2>
+            <div class="row" id="noticias-selecao"></div>
+
+        </div>
+    </div>
+
+    <footer class="text-center py-3 border-top">
         <p class="mb-0">© 2025 FutNews</p>
     </footer>
 
