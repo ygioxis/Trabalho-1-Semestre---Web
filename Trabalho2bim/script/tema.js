@@ -23,3 +23,23 @@ window.addEventListener('load', function () {
         }
     });
 });
+// Mostra nome do usuário logado na navbar
+window.addEventListener('load', function () {
+    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    const nomeUsuario = document.getElementById('nomeUsuario');
+    const btnPerfil = document.getElementById('btnPerfil');
+    const btnLogout = document.getElementById('btnLogout');
+    const btnLogin = document.getElementById('btnLogin');
+
+    if (usuario) {
+        if (nomeUsuario) nomeUsuario.textContent = '👤 ' + usuario.nome;
+        if (btnPerfil) btnPerfil.style.display = 'inline-block';
+        if (btnLogout) btnLogout.style.display = 'inline-block';
+        if (btnLogin) btnLogin.style.display = 'none';
+    }
+});
+
+function logout() {
+    localStorage.removeItem('usuarioLogado');
+    window.location.href = 'index.html';
+}
