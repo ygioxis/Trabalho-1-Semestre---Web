@@ -3,15 +3,15 @@
 
 /* ===== VARIÁVEIS ===== */
 :root {
-    --azul: #1b4f72;
-    --azul-escuro: #154360;
+    --azul: #c0392b;
+    --azul-escuro: #922b21;
     --fundo: #141414;
     --fundo-card: #1e1e1e;
     --fundo-navbar: #0a0a0a;
     --texto: #f0f0f0;
     --texto-fraco: #aaa;
     --borda: #2a2a2a;
-    --destaque: #1b4f72;
+    --destaque: #c0392b;
 }
 
 /* ===== GERAL ===== */
@@ -29,7 +29,7 @@ body {
     background: var(--fundo-navbar) !important;
     box-shadow: 0 2px 20px rgba(0,0,0,0.5);
     padding: 14px 0;
-    border-bottom: 2px solid var(--azul);
+    border-bottom: 2px solid #FFD700;
 }
 
 .navbar-brand {
@@ -53,9 +53,10 @@ body {
 }
 
 .nav-link:hover, .nav-link.active {
-    background: rgba(26,115,232,0.2) !important;
-    color: var(--azul) !important;
+    background: rgba(192,57,43,0.2) !important;
+    color: #FFD700 !important;
 }
+
 
 .btn-outline-light {
     border-color: rgba(255,255,255,0.3) !important;
