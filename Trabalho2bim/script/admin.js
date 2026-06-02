@@ -1,4 +1,15 @@
 let idParaExcluir = null;
+// Bloqueia acesso de não admins
+window.addEventListener('load', function () {
+    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    const emailAdmin = 'admin@futnews.com';
+    const senhaAdmin = 'admin123';
+
+    if (!usuario || usuario.email !== emailAdmin || usuario.senha !== senhaAdmin) {
+        alert('Acesso restrito!');
+        window.location.href = 'index.html';
+    }
+});
 
 // Salvar ou editar notícia
 function salvarNoticia() {
@@ -6,6 +17,7 @@ function salvarNoticia() {
     const titulo = document.getElementById('noticia-titulo').value.trim();
     const categoria = document.getElementById('noticia-categoria').value;
     const conteudo = document.getElementById('noticia-conteudo').value.trim();
+    const imagem = document.getElementById('noticia-imagem').value.trim();
 
     if (!titulo || !conteudo) {
         alert('Preencha o título e o conteúdo.');
@@ -16,10 +28,10 @@ function salvarNoticia() {
 
     if (id) {
         // Editar notícia existente
-        noticias = noticias.map(n => n.id == id ? { id: Number(id), titulo, categoria, conteudo } : n);
+        noticias = noticias.map(n => n.id == id ? { id: Number(id), titulo, categoria, conteudo, imagem } : n);
     } else {
         // Nova notícia
-        noticias.push({ id: Date.now(), titulo, categoria, conteudo });
+         noticias.push({ id: Date.now(), titulo, categoria, conteudo, imagem });
     }
 
     localStorage.setItem('noticias', JSON.stringify(noticias));
@@ -33,6 +45,7 @@ function limparForm() {
     document.getElementById('noticia-titulo').value = '';
     document.getElementById('noticia-conteudo').value = '';
     document.getElementById('titulo-form').textContent = 'Nova Notícia';
+    document.getElementById('noticia-imagem').value = '';
 }
 
 // Carrega lista de notícias no admin
@@ -73,6 +86,7 @@ function editarNoticia(id) {
     document.getElementById('noticia-titulo').value = noticia.titulo;
     document.getElementById('noticia-categoria').value = noticia.categoria;
     document.getElementById('noticia-conteudo').value = noticia.conteudo;
+    document.getElementById('noticia-imagem').value = noticia.imagem || '';
     document.getElementById('titulo-form').textContent = 'Editando Notícia';
 
     window.scrollTo(0, 0);

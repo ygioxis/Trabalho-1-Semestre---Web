@@ -3,15 +3,15 @@
 
 /* ===== VARIÁVEIS ===== */
 :root {
-    --azul: #1a73e8;
-    --azul-escuro: #0d47a1;
+    --azul: #1b4f72;
+    --azul-escuro: #154360;
     --fundo: #141414;
     --fundo-card: #1e1e1e;
     --fundo-navbar: #0a0a0a;
     --texto: #f0f0f0;
     --texto-fraco: #aaa;
     --borda: #2a2a2a;
-    --destaque: #1a73e8;
+    --destaque: #1b4f72;
 }
 
 /* ===== GERAL ===== */
@@ -323,4 +323,99 @@ footer p {
 }
 .carousel-caption {
     display: none;
+}
+/* ===== BARRA ROLANTE ===== */
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* ===== TÍTULOS DE SEÇÃO ===== */
+.secao-titulo {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: white;
+    border-left: 4px solid var(--azul);
+    padding-left: 14px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== NOTÍCIA DESTAQUE ===== */
+.destaque-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--fundo-card);
+    display: flex;
+    gap: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.destaque-card img {
+    width: 55%;
+    object-fit: cover;
+    min-height: 250px;
+}
+
+.destaque-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.destaque-info h3 {
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.destaque-info p {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .destaque-card {
+        flex-direction: column;
+    }
+    .destaque-card img {
+        width: 100%;
+        height: 200px;
+    }
+}.destaque-card {
+    display: flex !important;
+    flex-direction: row !important;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--fundo-card);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.destaque-card img {
+    width: 45% !important;
+    object-fit: cover;
+    min-height: 220px;
+}
+
+.destaque-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .destaque-card {
+        flex-direction: column !important;
+    }
+    .destaque-card img {
+        width: 100% !important;
+        height: 200px;
+    }
 }

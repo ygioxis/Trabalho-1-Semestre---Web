@@ -30,32 +30,37 @@
     <div class="container mt-4">
         <h2>Painel Admin</h2>
 
+        
         <!-- FORMULÁRIO -->
-        <div class="card mt-3 p-4">
-            <h5 id="titulo-form">Nova Notícia</h5>
-            <input type="hidden" id="noticia-id">
-            <div class="mb-3">
-                <label class="form-label">Título</label>
-                <input type="text" class="form-control" id="noticia-titulo">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Categoria</label>
-                <select class="form-select" id="noticia-categoria">
-                    <option value="Brasileirão">Brasileirão</option>
-                    <option value="Champions League">Champions League</option>
-                    <option value="Seleção">Seleção</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Conteúdo</label>
-                <textarea class="form-control" id="noticia-conteudo" rows="4"></textarea>
-            </div>
-            <div>
-                <button class="btn btn-success" onclick="salvarNoticia()">Salvar</button>
-                <button class="btn btn-secondary ms-2" onclick="limparForm()">Cancelar</button>
-            </div>
-        </div>
-
+<div class="card mt-3 p-4">
+    <h5 id="titulo-form">Nova Notícia</h5>
+    <input type="hidden" id="noticia-id">
+    <div class="mb-3">
+        <label class="form-label">Título</label>
+        <input type="text" class="form-control" id="noticia-titulo">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Categoria</label>
+        <select class="form-select" id="noticia-categoria">
+            <option value="Brasileirão">Brasileirão</option>
+            <option value="Champions League">Champions League</option>
+            <option value="Seleção">Seleção</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">URL da Imagem</label>
+        <input type="text" class="form-control" id="noticia-imagem" placeholder="Cole o link de uma imagem aqui">
+        <small class="text-muted">Ex: https://exemplo.com/imagem.jpg</small>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Conteúdo</label>
+        <textarea class="form-control" id="noticia-conteudo" rows="4"></textarea>
+    </div>
+    <div>
+        <button class="btn btn-success" onclick="salvarNoticia()">Salvar</button>
+        <button class="btn btn-secondary ms-2" onclick="limparForm()">Cancelar</button>
+    </div>
+</div>
         <!-- LISTA -->
         <h4 class="mt-5">Notícias Cadastradas</h4>
         <div id="lista-admin" class="mt-3"></div>

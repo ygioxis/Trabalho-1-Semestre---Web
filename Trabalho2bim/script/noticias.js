@@ -1,17 +1,18 @@
-// Imagem por categoria
-function imagemCategoria(categoria) {
+function imagemNoticia(noticia) {
+    if (noticia.imagem) return noticia.imagem;
     const imagens = {
-        'Brasileirão': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Brasileirao_Serie_A_logo.png/250px-Brasileirao_Serie_A_logo.png',
-        'Champions League': 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/UEFA_Champions_League_logo_2.svg/250px-UEFA_Champions_League_logo_2.svg.png',
-        'Seleção': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Brazil.svg/320px-Flag_of_Brazil.svg.png'
+        'Brasileirão': 'https://placehold.co/600x200/1a3a5c/white?text=Brasileirao+2025',
+        'Champions League': 'https://placehold.co/600x200/1a1a5c/white?text=Champions+League',
+        'Seleção': 'https://placehold.co/600x200/1a5c2a/white?text=Selecao+Brasileira'
     };
-    return imagens[categoria] || 'https://placehold.co/400x200/1a73e8/white?text=FutNews';
+    return imagens[noticia.categoria] || 'https://placehold.co/600x200/1a73e8/white?text=FutNews';
 }
-// Monta um card simples
+
 function montarCard(n) {
     return `
         <div class="col-12 col-md-4 mb-4">
             <div class="card h-100">
+                <img src="${imagemNoticia(n)}" class="card-img-top" alt="${n.categoria}" style="height:160px;object-fit:cover;">
                 <div class="card-body">
                     <span class="badge bg-success mb-2">${n.categoria}</span>
                     <h5 class="card-title">${n.titulo}</h5>
@@ -23,7 +24,6 @@ function montarCard(n) {
     `;
 }
 
-// Carrega notícias na página de notícias
 function carregarNoticias(filtro = '') {
     const lista = document.getElementById('lista-noticias');
     if (!lista) return;
@@ -45,35 +45,30 @@ function carregarNoticias(filtro = '') {
     lista.innerHTML = noticias.map(n => montarCard(n)).join('');
 }
 
-// Busca por palavra-chave
 function buscarNoticias() {
     const termo = document.getElementById('campoBusca').value;
     carregarNoticias(termo);
 }
 
-// Filtra por categoria
 function filtrarCategoria(categoria) {
     carregarNoticias(categoria);
 }
 
-// Carrega a home com destaque, categorias e barra rolante
 function carregarHome() {
     const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
     if (noticias.length === 0) return;
 
-    // Barra rolante
     const barra = document.getElementById('barra-noticias');
     if (barra) {
         barra.textContent = noticias.map(n => `⚽ ${n.titulo}`).join('   •   ');
     }
 
-    // Notícia destaque (primeira)
     const destaque = document.getElementById('noticia-destaque');
     if (destaque) {
         const n = noticias[0];
         destaque.innerHTML = `
-    <div class="destaque-card">
-        <img src="${imagemCategoria(n.categoria)}" alt="destaque" style="background:#1a1a1a;padding:20px;">
+            <div class="destaque-card">
+                <img src="${imagemNoticia(n)}" alt="destaque" style="background:#1a1a1a;">
                 <div class="destaque-info">
                     <span class="badge bg-success mb-3" style="width:fit-content">${n.categoria}</span>
                     <h3>${n.titulo}</h3>
@@ -84,7 +79,6 @@ function carregarHome() {
         `;
     }
 
-    // Notícias por categoria
     const categorias = {
         'Brasileirão': 'noticias-brasileirao',
         'Champions League': 'noticias-champions',
