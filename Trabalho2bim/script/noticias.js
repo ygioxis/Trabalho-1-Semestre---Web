@@ -1,3 +1,13 @@
+function lerJSON(chave) {
+    try {
+        const dados = localStorage.getItem(chave);
+        return dados ? JSON.parse(dados) : null;
+    } catch (erro) {
+        console.error(`Erro ao ler "${chave}" do localStorage:`, erro);
+        return null;
+    }
+}
+
 function imagemNoticia(noticia) {
     if (noticia.imagem) return noticia.imagem;
     const imagens = {
@@ -28,7 +38,7 @@ function carregarNoticias(filtro = '') {
     const lista = document.getElementById('lista-noticias');
     if (!lista) return;
 
-    let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    let noticias = lerJSON('noticias') || [];
 
     if (filtro) {
         noticias = noticias.filter(n =>
@@ -46,8 +56,12 @@ function carregarNoticias(filtro = '') {
 }
 
 function buscarNoticias() {
-    const termo = document.getElementById('campoBusca').value;
-    carregarNoticias(termo);
+    const campo = document.getElementById('campoBusca');
+    if (!campo) {
+        console.error('Campo de busca não encontrado.');
+        return;
+    }
+    carregarNoticias(campo.value);
 }
 
 function filtrarCategoria(categoria) {
@@ -55,7 +69,7 @@ function filtrarCategoria(categoria) {
 }
 
 function carregarHome() {
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const noticias = lerJSON('noticias') || [];
     if (noticias.length === 0) return;
 
     const barra = document.getElementById('barra-noticias');

@@ -1,7 +1,18 @@
 let idParaExcluir = null;
-// Bloqueia acesso de não admins
+
+function lerJSON(chave) {
+    try {
+        const dados = localStorage.getItem(chave);
+        return dados ? JSON.parse(dados) : null;
+    } catch (erro) {
+        console.error(`Erro ao ler "${chave}" do localStorage:`, erro);
+        return null;
+    }
+}
+
+// Bloqueia acesso de nao admins
 window.addEventListener('load', function () {
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    const usuario = lerJSON('usuarioLogado');
     const emailAdmin = 'admin@futnews.com';
     const senhaAdmin = 'admin123';
 
@@ -11,7 +22,7 @@ window.addEventListener('load', function () {
     }
 });
 
-// Salvar ou editar notícia
+// Salvar ou editar noticia
 function salvarNoticia() {
     const id = document.getElementById('noticia-id').value;
     const titulo = document.getElementById('noticia-titulo').value.trim();
@@ -24,22 +35,27 @@ function salvarNoticia() {
         return;
     }
 
-    let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    let noticias = lerJSON('noticias') || [];
 
     if (id) {
-        // Editar notícia existente
         noticias = noticias.map(n => n.id == id ? { id: Number(id), titulo, categoria, conteudo, imagem } : n);
     } else {
-        // Nova notícia
-         noticias.push({ id: Date.now(), titulo, categoria, conteudo, imagem });
+        noticias.push({ id: Date.now(), titulo, categoria, conteudo, imagem });
     }
 
-    localStorage.setItem('noticias', JSON.stringify(noticias));
+    try {
+        localStorage.setItem('noticias', JSON.stringify(noticias));
+    } catch (erro) {
+        console.error('Erro ao salvar notícia:', erro);
+        alert('Erro ao salvar notícia. Verifique o armazenamento do navegador.');
+        return;
+    }
+
     limparForm();
     carregarAdmin();
 }
 
-// Limpa o formulário
+// Limpa o formulario
 function limparForm() {
     document.getElementById('noticia-id').value = '';
     document.getElementById('noticia-titulo').value = '';
@@ -48,12 +64,12 @@ function limparForm() {
     document.getElementById('noticia-imagem').value = '';
 }
 
-// Carrega lista de notícias no admin
+// Carrega lista de noticias no admin
 function carregarAdmin() {
     const lista = document.getElementById('lista-admin');
     if (!lista) return;
 
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const noticias = lerJSON('noticias') || [];
 
     if (noticias.length === 0) {
         lista.innerHTML = '<p class="text-muted">Nenhuma notícia cadastrada.</p>';
@@ -76,11 +92,14 @@ function carregarAdmin() {
     `).join('');
 }
 
-// Preenche formulário para editar
+// Preenche formulario para editar
 function editarNoticia(id) {
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const noticias = lerJSON('noticias') || [];
     const noticia = noticias.find(n => n.id === id);
-    if (!noticia) return;
+    if (!noticia) {
+        alert('Notícia não encontrada.');
+        return;
+    }
 
     document.getElementById('noticia-id').value = noticia.id;
     document.getElementById('noticia-titulo').value = noticia.titulo;
@@ -92,20 +111,43 @@ function editarNoticia(id) {
     window.scrollTo(0, 0);
 }
 
-// Abre modal de confirmação
+// Abre modal de confirmacao
 function confirmarExclusao(id) {
     idParaExcluir = id;
-    const modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
+    const modalEl = document.getElementById('modalExcluir');
+    if (!modalEl) {
+        console.error('Modal de exclusão não encontrado.');
+        return;
+    }
+    const modal = new bootstrap.Modal(modalEl);
     modal.show();
 }
 
-// Executa a exclusão
+// Executa a exclusao
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btnConfirmarExcluir').addEventListener('click', function () {
-        let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const btnConfirmar = document.getElementById('btnConfirmarExcluir');
+    if (!btnConfirmar) {
+        console.error('Botão de confirmar exclusão não encontrado.');
+        return;
+    }
+
+    btnConfirmar.addEventListener('click', function () {
+        let noticias = lerJSON('noticias') || [];
         noticias = noticias.filter(n => n.id !== idParaExcluir);
-        localStorage.setItem('noticias', JSON.stringify(noticias));
-        bootstrap.Modal.getInstance(document.getElementById('modalExcluir')).hide();
+
+        try {
+            localStorage.setItem('noticias', JSON.stringify(noticias));
+        } catch (erro) {
+            console.error('Erro ao excluir notícia:', erro);
+            alert('Erro ao excluir notícia. Tente novamente.');
+            return;
+        }
+
+        const modalEl = document.getElementById('modalExcluir');
+        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+        if (modalInstance) {
+            modalInstance.hide();
+        }
         carregarAdmin();
     });
 

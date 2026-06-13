@@ -1,3 +1,13 @@
+function lerJSON(chave) {
+    try {
+        const dados = localStorage.getItem(chave);
+        return dados ? JSON.parse(dados) : null;
+    } catch (erro) {
+        console.error(`Erro ao ler "${chave}" do localStorage:`, erro);
+        return null;
+    }
+}
+
 const temaSalvo = localStorage.getItem('tema');
 if (temaSalvo === 'escuro') {
     document.documentElement.setAttribute('data-bs-theme', 'dark');
@@ -5,6 +15,7 @@ if (temaSalvo === 'escuro') {
 
 window.addEventListener('load', function () {
     const btn = document.getElementById('btnTema');
+    if (!btn) return;
 
     if (localStorage.getItem('tema') === 'escuro') {
         btn.textContent = '☀️ Tema Claro';
@@ -23,9 +34,10 @@ window.addEventListener('load', function () {
         }
     });
 });
-// Mostra nome do usuário logado na navbar
+
+// Mostra nome do usuario logado na navbar
 window.addEventListener('load', function () {
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    const usuario = lerJSON('usuarioLogado');
     const nomeUsuario = document.getElementById('nomeUsuario');
     const btnPerfil = document.getElementById('btnPerfil');
     const btnLogout = document.getElementById('btnLogout');
@@ -43,9 +55,10 @@ function logout() {
     localStorage.removeItem('usuarioLogado');
     window.location.href = 'index.html';
 }
-// Verifica se o usuário logado é admin
+
+// Verifica se o usuario logado e admin
 function verificarAdmin() {
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    const usuario = lerJSON('usuarioLogado');
     const emailAdmin = 'admin@futnews.com';
     const senhaAdmin = 'admin123';
 
