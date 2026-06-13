@@ -1,0 +1,13 @@
+{
+  "name": "trabalho-1-semestre-web",
+  "version": "1.0.0",
+  "description": "FutNews - Portal de notícias de futebol",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

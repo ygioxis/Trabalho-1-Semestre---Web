@@ -60,3 +60,7 @@ function verificarAdmin() {
 }
 
 window.addEventListener('load', verificarAdmin);
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { logout, verificarAdmin };
+}

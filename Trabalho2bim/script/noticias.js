@@ -101,3 +101,14 @@ document.addEventListener('DOMContentLoaded', function () {
     carregarNoticias();
     carregarHome();
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        imagemNoticia,
+        montarCard,
+        carregarNoticias,
+        buscarNoticias,
+        filtrarCategoria,
+        carregarHome
+    };
+}

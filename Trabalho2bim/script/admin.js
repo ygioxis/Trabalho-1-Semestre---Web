@@ -111,3 +111,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     carregarAdmin();
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        salvarNoticia,
+        limparForm,
+        carregarAdmin,
+        editarNoticia,
+        confirmarExclusao
+    };
+}

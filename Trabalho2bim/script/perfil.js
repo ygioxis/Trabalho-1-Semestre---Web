@@ -60,3 +60,7 @@ function excluirConta() {
 
     window.location.href = 'login.html';
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { confirmarSalvar, excluirConta };
+}

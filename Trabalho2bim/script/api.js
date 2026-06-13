@@ -41,3 +41,7 @@ async function carregarNoticiasAPI() {
 }
 
 document.addEventListener('DOMContentLoaded', carregarNoticiasAPI);
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { buscarNoticiasAPI, carregarNoticiasAPI };
+}
