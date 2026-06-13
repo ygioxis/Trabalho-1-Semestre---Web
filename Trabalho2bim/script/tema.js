@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
         }
     });
 });
-// Mostra nome do usuário logado na navbar
+
 window.addEventListener('load', function () {
     const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
     const nomeUsuario = document.getElementById('nomeUsuario');
@@ -43,16 +43,14 @@ function logout() {
     localStorage.removeItem('usuarioLogado');
     window.location.href = 'index.html';
 }
-// Verifica se o usuário logado é admin
+
 function verificarAdmin() {
     const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
-    const emailAdmin = 'admin@futnews.com';
-    const senhaAdmin = 'admin123';
 
     const linkAdmin = document.querySelector('a[href="admin.html"]');
     if (!linkAdmin) return;
 
-    if (usuario && usuario.email === emailAdmin && usuario.senha === senhaAdmin) {
+    if (usuario && usuario.role === 'admin') {
         linkAdmin.style.display = 'inline-block';
     } else {
         linkAdmin.style.display = 'none';

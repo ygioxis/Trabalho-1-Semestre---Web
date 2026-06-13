@@ -1,6 +1,5 @@
 async function buscarNoticiasAPI() {
-    const API_KEY = 'pub_84dd4091276b41a980903198b50d5238';
-    const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=futebol&language=pt`;
+    const url = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(CONFIG.API_KEY)}&q=futebol&language=pt`;
 
     try {
         const resposta = await fetch(url);
@@ -25,19 +24,26 @@ async function carregarNoticiasAPI() {
         return;
     }
 
-    lista.innerHTML = artigos.map(a => `
+    lista.innerHTML = artigos.map(a => {
+        const imgUrl = sanitizeURL(a.image_url);
+        const linkUrl = sanitizeURL(a.link);
+        const title = escapeHTML(a.title);
+        const desc = escapeHTML(a.description ? a.description.substring(0, 80) + '...' : '');
+
+        return `
         <div class="col-12 col-md-4 mb-4">
             <div class="card h-100">
-                ${a.image_url ? `<img src="${a.image_url}" class="card-img-top" style="height:180px;object-fit:cover" alt="noticia">` : ''}
+                ${imgUrl ? `<img src="${imgUrl}" class="card-img-top" style="height:180px;object-fit:cover" alt="noticia">` : ''}
                 <div class="card-body">
                     <span class="badge bg-success mb-2">Futebol</span>
-                    <h6 class="card-title">${a.title}</h6>
-                    <p class="card-text small">${a.description ? a.description.substring(0, 80) + '...' : ''}</p>
-                    <a href="${a.link}" target="_blank" class="btn btn-success btn-sm">Ler mais</a>
+                    <h6 class="card-title">${title}</h6>
+                    <p class="card-text small">${desc}</p>
+                    ${linkUrl ? `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm">Ler mais</a>` : ''}
                 </div>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 document.addEventListener('DOMContentLoaded', carregarNoticiasAPI);

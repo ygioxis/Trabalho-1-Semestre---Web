@@ -1,3 +1,6 @@
 const CONFIG = {
-    API_KEY: '2d0d549734796ae6ce33e6ed61bd7ee6'
+    // IMPORTANT: Replace with your own API key.
+    // Ideally, API calls should be proxied through a backend server
+    // so the key is never exposed in client-side code.
+    API_KEY: 'YOUR_API_KEY_HERE'
 };

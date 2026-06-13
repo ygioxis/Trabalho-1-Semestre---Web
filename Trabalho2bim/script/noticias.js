@@ -1,5 +1,5 @@
 function imagemNoticia(noticia) {
-    if (noticia.imagem) return noticia.imagem;
+    if (noticia.imagem) return sanitizeURL(noticia.imagem);
     const imagens = {
         'Brasileirão': 'https://placehold.co/600x200/1a3a5c/white?text=Brasileirao+2025',
         'Champions League': 'https://placehold.co/600x200/1a1a5c/white?text=Champions+League',
@@ -9,15 +9,16 @@ function imagemNoticia(noticia) {
 }
 
 function montarCard(n) {
+    const imgSrc = imagemNoticia(n);
     return `
         <div class="col-12 col-md-4 mb-4">
             <div class="card h-100">
-                <img src="${imagemNoticia(n)}" class="card-img-top" alt="${n.categoria}" style="height:160px;object-fit:cover;">
+                ${imgSrc ? `<img src="${imgSrc}" class="card-img-top" alt="${escapeHTML(n.categoria)}" style="height:160px;object-fit:cover;">` : ''}
                 <div class="card-body">
-                    <span class="badge bg-success mb-2">${n.categoria}</span>
-                    <h5 class="card-title">${n.titulo}</h5>
-                    <p class="card-text">${n.conteudo.substring(0, 100)}...</p>
-                    <a href="noticia.html?id=${n.id}" class="btn btn-success btn-sm mt-2">Ler mais</a>
+                    <span class="badge bg-success mb-2">${escapeHTML(n.categoria)}</span>
+                    <h5 class="card-title">${escapeHTML(n.titulo)}</h5>
+                    <p class="card-text">${escapeHTML(n.conteudo.substring(0, 100))}...</p>
+                    <a href="noticia.html?id=${Number(n.id)}" class="btn btn-success btn-sm mt-2">Ler mais</a>
                 </div>
             </div>
         </div>
@@ -66,14 +67,15 @@ function carregarHome() {
     const destaque = document.getElementById('noticia-destaque');
     if (destaque) {
         const n = noticias[0];
+        const imgSrc = imagemNoticia(n);
         destaque.innerHTML = `
             <div class="destaque-card">
-                <img src="${imagemNoticia(n)}" alt="destaque" style="background:#1a1a1a;">
+                ${imgSrc ? `<img src="${imgSrc}" alt="destaque" style="background:#1a1a1a;">` : ''}
                 <div class="destaque-info">
-                    <span class="badge bg-success mb-3" style="width:fit-content">${n.categoria}</span>
-                    <h3>${n.titulo}</h3>
-                    <p>${n.conteudo.substring(0, 150)}...</p>
-                    <a href="noticia.html?id=${n.id}" class="btn btn-success">Ler notícia completa</a>
+                    <span class="badge bg-success mb-3" style="width:fit-content">${escapeHTML(n.categoria)}</span>
+                    <h3>${escapeHTML(n.titulo)}</h3>
+                    <p>${escapeHTML(n.conteudo.substring(0, 150))}...</p>
+                    <a href="noticia.html?id=${Number(n.id)}" class="btn btn-success">Ler notícia completa</a>
                 </div>
             </div>
         `;
