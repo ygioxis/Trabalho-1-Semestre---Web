@@ -24,11 +24,11 @@ function montarCard(n) {
     `;
 }
 
-function carregarNoticias(filtro = '') {
+function carregarNoticias(filtro) {
     const lista = document.getElementById('lista-noticias');
     if (!lista) return;
 
-    let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    let noticias = getNoticias();
 
     if (filtro) {
         noticias = noticias.filter(n =>
@@ -38,7 +38,7 @@ function carregarNoticias(filtro = '') {
     }
 
     if (noticias.length === 0) {
-        lista.innerHTML = '<p class="text-muted">Nenhuma notícia encontrada.</p>';
+        lista.innerHTML = mensagemVazia('Nenhuma noticia encontrada.');
         return;
     }
 
@@ -55,7 +55,7 @@ function filtrarCategoria(categoria) {
 }
 
 function carregarHome() {
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const noticias = getNoticias();
     if (noticias.length === 0) return;
 
     const barra = document.getElementById('barra-noticias');
@@ -73,7 +73,7 @@ function carregarHome() {
                     <span class="badge bg-success mb-3" style="width:fit-content">${n.categoria}</span>
                     <h3>${n.titulo}</h3>
                     <p>${n.conteudo.substring(0, 150)}...</p>
-                    <a href="noticia.html?id=${n.id}" class="btn btn-success">Ler notícia completa</a>
+                    <a href="noticia.html?id=${n.id}" class="btn btn-success">Ler noticia completa</a>
                 </div>
             </div>
         `;
@@ -90,7 +90,7 @@ function carregarHome() {
         if (!div) continue;
         const filtradas = noticias.filter(n => n.categoria === cat);
         if (filtradas.length === 0) {
-            div.innerHTML = '<p class="text-muted col-12">Nenhuma notícia nessa categoria.</p>';
+            div.innerHTML = mensagemVazia('Nenhuma noticia nessa categoria.');
         } else {
             div.innerHTML = filtradas.map(n => montarCard(n)).join('');
         }

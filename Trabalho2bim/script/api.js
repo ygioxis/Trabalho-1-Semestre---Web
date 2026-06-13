@@ -7,7 +7,7 @@ async function buscarNoticiasAPI() {
         const dados = await resposta.json();
         return dados.results || [];
     } catch (erro) {
-        console.error('Erro ao buscar notícias:', erro);
+        console.error('Erro ao buscar noticias:', erro);
         return [];
     }
 }
@@ -16,12 +16,12 @@ async function carregarNoticiasAPI() {
     const lista = document.getElementById('lista-noticias-api');
     if (!lista) return;
 
-    lista.innerHTML = '<p class="text-muted">Carregando notícias...</p>';
+    lista.innerHTML = mensagemVazia('Carregando noticias...');
 
     const artigos = await buscarNoticiasAPI();
 
     if (artigos.length === 0) {
-        lista.innerHTML = '<p class="text-muted">Nenhuma notícia encontrada.</p>';
+        lista.innerHTML = mensagemVazia('Nenhuma noticia encontrada.');
         return;
     }
 

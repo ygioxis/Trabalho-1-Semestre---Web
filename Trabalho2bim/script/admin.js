@@ -1,17 +1,16 @@
 let idParaExcluir = null;
-// Bloqueia acesso de não admins
-window.addEventListener('load', function () {
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
-    const emailAdmin = 'admin@futnews.com';
-    const senhaAdmin = 'admin123';
 
-    if (!usuario || usuario.email !== emailAdmin || usuario.senha !== senhaAdmin) {
+// Bloqueia acesso de nao admins
+window.addEventListener('load', function () {
+    const usuario = getUsuarioLogado();
+
+    if (!isAdmin(usuario)) {
         alert('Acesso restrito!');
         window.location.href = 'index.html';
     }
 });
 
-// Salvar ou editar notícia
+// Salvar ou editar noticia
 function salvarNoticia() {
     const id = document.getElementById('noticia-id').value;
     const titulo = document.getElementById('noticia-titulo').value.trim();
@@ -20,43 +19,41 @@ function salvarNoticia() {
     const imagem = document.getElementById('noticia-imagem').value.trim();
 
     if (!titulo || !conteudo) {
-        alert('Preencha o título e o conteúdo.');
+        alert('Preencha o titulo e o conteudo.');
         return;
     }
 
-    let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    let noticias = getNoticias();
 
     if (id) {
-        // Editar notícia existente
         noticias = noticias.map(n => n.id == id ? { id: Number(id), titulo, categoria, conteudo, imagem } : n);
     } else {
-        // Nova notícia
-         noticias.push({ id: Date.now(), titulo, categoria, conteudo, imagem });
+        noticias.push({ id: Date.now(), titulo, categoria, conteudo, imagem });
     }
 
-    localStorage.setItem('noticias', JSON.stringify(noticias));
+    saveNoticias(noticias);
     limparForm();
     carregarAdmin();
 }
 
-// Limpa o formulário
+// Limpa o formulario
 function limparForm() {
     document.getElementById('noticia-id').value = '';
     document.getElementById('noticia-titulo').value = '';
     document.getElementById('noticia-conteudo').value = '';
-    document.getElementById('titulo-form').textContent = 'Nova Notícia';
+    document.getElementById('titulo-form').textContent = 'Nova Noticia';
     document.getElementById('noticia-imagem').value = '';
 }
 
-// Carrega lista de notícias no admin
+// Carrega lista de noticias no admin
 function carregarAdmin() {
     const lista = document.getElementById('lista-admin');
     if (!lista) return;
 
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const noticias = getNoticias();
 
     if (noticias.length === 0) {
-        lista.innerHTML = '<p class="text-muted">Nenhuma notícia cadastrada.</p>';
+        lista.innerHTML = mensagemVazia('Nenhuma noticia cadastrada.');
         return;
     }
 
@@ -76,9 +73,9 @@ function carregarAdmin() {
     `).join('');
 }
 
-// Preenche formulário para editar
+// Preenche formulario para editar
 function editarNoticia(id) {
-    const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+    const noticias = getNoticias();
     const noticia = noticias.find(n => n.id === id);
     if (!noticia) return;
 
@@ -87,24 +84,24 @@ function editarNoticia(id) {
     document.getElementById('noticia-categoria').value = noticia.categoria;
     document.getElementById('noticia-conteudo').value = noticia.conteudo;
     document.getElementById('noticia-imagem').value = noticia.imagem || '';
-    document.getElementById('titulo-form').textContent = 'Editando Notícia';
+    document.getElementById('titulo-form').textContent = 'Editando Noticia';
 
     window.scrollTo(0, 0);
 }
 
-// Abre modal de confirmação
+// Abre modal de confirmacao
 function confirmarExclusao(id) {
     idParaExcluir = id;
     const modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
     modal.show();
 }
 
-// Executa a exclusão
+// Executa a exclusao
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnConfirmarExcluir').addEventListener('click', function () {
-        let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
+        let noticias = getNoticias();
         noticias = noticias.filter(n => n.id !== idParaExcluir);
-        localStorage.setItem('noticias', JSON.stringify(noticias));
+        saveNoticias(noticias);
         bootstrap.Modal.getInstance(document.getElementById('modalExcluir')).hide();
         carregarAdmin();
     });
