@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,7 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">⚽ FutNews</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
@@ -20,10 +19,16 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="noticias.html">Notícias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="noticias-api.html">Ao Vivo 🔴</a></li>
                     <li class="nav-item"><a class="nav-link" href="admin.html" style="display:none">Admin</a></li>
                 </ul>
-                <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-white" id="nomeUsuario"></span>
+                    <a href="perfil.html" class="btn btn-outline-light btn-sm" id="btnPerfil" style="display:none">Perfil</a>
+                    <button class="btn btn-outline-light btn-sm" id="btnLogout" style="display:none" onclick="logout()">Sair</button>
+                    <a href="login.html" class="btn btn-outline-light btn-sm" id="btnLogin">Entrar</a>
+                    <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -31,29 +36,28 @@
     <div class="container mt-4">
         <div class="row">
 
-            <!-- LISTA DE NOTÍCIAS -->
             <div class="col-12 col-md-9">
-                <h2>Notícias</h2>
+                <h2 class="secao-titulo">📰 NOTÍCIAS</h2>
 
-                <!-- BUSCA -->
+
                 <div class="input-group mb-4">
                     <input type="text" class="form-control" id="campoBusca" placeholder="Buscar notícia...">
-                    <button class="btn btn-success" onclick="buscarNoticias()">Buscar</button>
+                    <button class="btn btn-success" onclick="buscarNoticias()">🔍 Buscar</button>
                 </div>
 
                 <div class="row" id="lista-noticias">
-                    <p class="text-muted">Nenhuma notícia ainda.</p>
+                    <p class="text-muted">Nenhuma notícia cadastrada ainda.</p>
                 </div>
             </div>
 
-            <!-- SIDEBAR -->
-            <div class="col-12 col-md-3">
-                <h5>Categorias</h5>
+
+            <div class="col-12 col-md-3 mt-4 mt-md-0">
+                <h5 class="secao-titulo" style="font-size:1rem;">🗂️ CATEGORIAS</h5>
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('')">Todas</li>
-                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('Brasileirão')">Brasileirão</li>
-                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('Champions League')">Champions League</li>
-                    <li class="list-group-item list-group-item-action" onclick="filtrarCategoria('Seleção')">Seleção</li>
+                    <li class="list-group-item cat-item ativo" data-cat="" onclick="filtrarCategoria('')">⚽ Todas</li>
+                    <li class="list-group-item cat-item" data-cat="Brasileirão" onclick="filtrarCategoria('Brasileirão')">🇧🇷 Brasileirão</li>
+                    <li class="list-group-item cat-item" data-cat="Champions League" onclick="filtrarCategoria('Champions League')">🏆 Champions League</li>
+                    <li class="list-group-item cat-item" data-cat="Seleção" onclick="filtrarCategoria('Seleção')">🌍 Seleção</li>
                 </ul>
             </div>
 
