@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">⚽ FutNews</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
@@ -18,17 +18,23 @@
             <div class="collapse navbar-collapse" id="menuNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="noticias.html">Notícias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="noticias-api.html">Ao Vivo 🔴</a></li>
                     <li class="nav-item"><a class="nav-link" href="admin.html" style="display:none">Admin</a></li>
-                <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
-                <li class="nav-item"><a class="nav-link" href="noticias-api.html">Ao Vivo 🔴</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-white" id="nomeUsuario"></span>
+                    <a href="perfil.html" class="btn btn-outline-light btn-sm" id="btnPerfil" style="display:none">Perfil</a>
+                    <button class="btn btn-outline-light btn-sm" id="btnLogout" style="display:none" onclick="logout()">Sair</button>
+                    <a href="login.html" class="btn btn-outline-light btn-sm" id="btnLogin">Entrar</a>
+                    <button class="btn btn-outline-light btn-sm" id="btnTema">🌙 Tema Escuro</button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <a href="noticias.html" class="btn btn-outline-secondary btn-sm mb-4">← Voltar</a>
+    <div class="container mt-4" style="max-width: 800px;">
+        <a href="noticias.html" class="btn btn-outline-secondary btn-sm mb-4">← Voltar para Notícias</a>
         <div id="conteudo-noticia">
             <p class="text-muted">Carregando...</p>
         </div>
@@ -41,24 +47,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script/tema.js"></script>
     <script>
-        // Pega o id da URL
         const params = new URLSearchParams(window.location.search);
         const id = Number(params.get('id'));
-
-        // Busca a notícia no localStorage
         const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
         const noticia = noticias.find(n => n.id === id);
 
         const div = document.getElementById('conteudo-noticia');
 
         if (!noticia) {
-            div.innerHTML = '<p class="text-danger">Notícia não encontrada.</p>';
+            div.innerHTML = '<div class="alert alert-danger">Notícia não encontrada.</div>';
         } else {
+            const imgSrc = noticia.imagem || {
+                'Brasileirão': 'https://placehold.co/800x350/1a3a5c/white?text=Brasileirao+2025',
+                'Champions League': 'https://placehold.co/800x350/1a1a5c/white?text=Champions+League',
+                'Seleção': 'https://placehold.co/800x350/1a5c2a/white?text=Selecao+Brasileira'
+            }[noticia.categoria] || 'https://placehold.co/800x350/c0392b/white?text=FutNews';
+
+            document.title = noticia.titulo + ' - FutNews';
+
             div.innerHTML = `
-                <span class="badge bg-success mb-2">${noticia.categoria}</span>
-                <h1 class="mt-2">${noticia.titulo}</h1>
+                <span class="badge bg-success mb-3">${noticia.categoria}</span>
+                <h1 class="mb-3" style="font-weight:900; font-size:1.8rem;">${noticia.titulo}</h1>
+                ${noticia.data ? `<p class="text-muted small mb-3">📅 ${noticia.data}</p>` : ''}
+                <img src="${imgSrc}" alt="${noticia.categoria}" class="w-100 mb-4" style="border-radius:12px; max-height:380px; object-fit:cover;" onerror="this.style.display='none'">
                 <hr>
-                <p class="lead">${noticia.conteudo}</p>
+                <p class="lead" style="line-height:1.8; font-size:1.1rem;">${noticia.conteudo}</p>
+                <hr class="mt-4">
+                <a href="noticias.html" class="btn btn-success">← Ver mais notícias</a>
             `;
         }
     </script>
