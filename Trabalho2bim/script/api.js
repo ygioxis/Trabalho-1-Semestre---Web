@@ -9,8 +9,7 @@ let categoriaAPIAtiva = 'Todos';
 
 async function buscarNoticiasAPI(query) {
     const API_KEY = 'pub_84dd4091276b41a980903198b50d5238';
-    const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=${encodeURIComponent(query)}&language=pt&category=sports`;
-
+    const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&category=sports&tag=football`;
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
