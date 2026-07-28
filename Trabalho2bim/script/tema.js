@@ -1,4 +1,4 @@
-
+// Aplica o tema salvo (claro ou escuro) assim que o script carrega, antes mesmo da página renderizar
 (function () {
     if (localStorage.getItem('tema') === 'claro') {
         document.documentElement.setAttribute('data-bs-theme', 'light');
@@ -7,6 +7,7 @@
     }
 })();
 
+// Ao carregar a página: configura o botão de trocar tema e atualiza a navbar conforme o usuário está logado ou não (e se é admin)
 window.addEventListener('load', function () {
     const btn = document.getElementById('btnTema');
     if (btn) {
@@ -56,6 +57,7 @@ window.addEventListener('load', function () {
     }
 });
 
+// Remove o usuário logado do localStorage e volta para a página inicial
 function logout() {
     localStorage.removeItem('usuarioLogado');
     window.location.href = 'index.html';
