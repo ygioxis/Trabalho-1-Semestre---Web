@@ -1,3 +1,4 @@
+// Ao carregar a página: exige login e preenche o formulário e o cabeçalho com os dados do usuário logado
 window.addEventListener('load', function () {
     const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
     if (!usuario) {
@@ -12,6 +13,7 @@ window.addEventListener('load', function () {
     document.getElementById('avatar-inicial').textContent = usuario.nome.charAt(0).toUpperCase();
 });
 
+// Valida e salva as alterações do perfil (nome, email e senha) no localStorage, atualizando a tela em seguida
 function confirmarSalvar() {
     const nome = document.getElementById('perfil-nome').value.trim();
     const email = document.getElementById('perfil-email').value.trim();
@@ -66,6 +68,7 @@ function confirmarSalvar() {
     msg.className = 'text-success mt-2';
 }
 
+// Remove o usuário da lista de usuários, faz logout e volta para a tela de login
 function excluirConta() {
     const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
