@@ -1,3 +1,4 @@
+// Ao carregar a página de login: se já existe usuário logado, manda direto pra home; também abre a aba de cadastro se vier na URL
 window.addEventListener('load', function () {
     const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
     if (usuario) {
@@ -12,6 +13,7 @@ window.addEventListener('load', function () {
     }
 });
 
+// Confere email e senha (checando admin fixo e usuários cadastrados) e loga o usuário se estiver correto
 function fazerLogin() {
     const email = document.getElementById('login-email').value.trim();
     const senha = document.getElementById('login-senha').value.trim();
@@ -45,6 +47,7 @@ function fazerLogin() {
     window.location.href = 'index.html';
 }
 
+// Valida os dados do formulário de cadastro e salva o novo usuário no localStorage
 function fazerCadastro() {
     const nome = document.getElementById('cad-nome').value.trim();
     const email = document.getElementById('cad-email').value.trim();
@@ -91,6 +94,7 @@ function fazerCadastro() {
     }, 1200);
 }
 
+// Permite enviar os formulários de login e cadastro apertando Enter nos campos
 document.addEventListener('DOMContentLoaded', function () {
     const loginSenha = document.getElementById('login-senha');
     if (loginSenha) loginSenha.addEventListener('keydown', e => { if (e.key === 'Enter') fazerLogin(); });
