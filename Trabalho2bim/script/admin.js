@@ -1,6 +1,7 @@
 const EMAIL_ADMIN = 'admin@futnews.com';
 let idParaExcluir = null;
 
+// Ao carregar a página, verifica se o usuário logado é o admin; se não for, bloqueia o acesso e redireciona para o login
 window.addEventListener('load', function () {
     const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
     if (!usuario || usuario.email !== EMAIL_ADMIN) {
@@ -9,6 +10,7 @@ window.addEventListener('load', function () {
     }
 });
 
+// Salva uma notícia nova ou atualiza uma existente (baseado no id) e guarda tudo no localStorage
 function salvarNoticia() {
     const id = document.getElementById('noticia-id').value;
     const titulo = document.getElementById('noticia-titulo').value.trim();
@@ -39,6 +41,7 @@ function salvarNoticia() {
     carregarAdmin();
 }
 
+// Limpa os campos do formulário e volta ele ao estado de "Nova Notícia"
 function limparForm() {
     document.getElementById('noticia-id').value = '';
     document.getElementById('noticia-titulo').value = '';
@@ -49,6 +52,7 @@ function limparForm() {
     document.getElementById('btn-salvar').textContent = '✅ Publicar';
 }
 
+// Busca as notícias salvas e monta a lista de cards exibida no painel admin
 function carregarAdmin() {
     const lista = document.getElementById('lista-admin');
     if (!lista) return;
@@ -77,6 +81,7 @@ function carregarAdmin() {
     `).join('');
 }
 
+// Preenche o formulário com os dados de uma notícia existente para permitir a edição
 function editarNoticia(id) {
     const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
     const noticia = noticias.find(n => n.id === id);
@@ -93,12 +98,14 @@ function editarNoticia(id) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Guarda o id da notícia a excluir e abre o modal de confirmação
 function confirmarExclusao(id) {
     idParaExcluir = id;
     const modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
     modal.show();
 }
 
+// Exibe uma mensagem rápida (toast) no canto da tela e some sozinha depois de um tempo
 function mostrarToast(msg) {
     const div = document.getElementById('toast-msg');
     if (!div) return;
@@ -108,6 +115,7 @@ function mostrarToast(msg) {
     setTimeout(() => { div.style.opacity = '0'; setTimeout(() => div.style.display = 'none', 400); }, 2500);
 }
 
+// Quando a página carrega: liga o botão de confirmar exclusão (que remove a notícia do localStorage) e já exibe a lista de notícias
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnConfirmarExcluir').addEventListener('click', function () {
         let noticias = JSON.parse(localStorage.getItem('noticias')) || [];
