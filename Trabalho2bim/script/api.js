@@ -7,6 +7,7 @@ const CATEGORIAS_API = {
 
 let categoriaAPIAtiva = 'Todos';
 
+// Faz a requisição para a API externa (newsdata.io) buscando notícias de esporte pelo termo informado
 async function buscarNoticiasAPI(query) {
     const API_KEY = 'pub_84dd4091276b41a980903198b50d5238';
     const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=${encodeURIComponent(query)}&language=pt&category=sports`;
@@ -39,6 +40,7 @@ async function buscarNoticiasAPI(query) {
     }
 }
 
+// Controla o carregamento da tela "Ao Vivo": mostra o spinner, busca na API, filtra por categoria e monta os cards (ou mostra erro)
 async function carregarNoticiasAPI(categoria = 'Todos') {
     categoriaAPIAtiva = categoria;
 
@@ -148,6 +150,7 @@ async function carregarNoticiasAPI(categoria = 'Todos') {
     `).join('');
 }
 
+// Quando a página carrega: monta os botões de filtro por categoria e já busca as notícias "Todos"
 document.addEventListener('DOMContentLoaded', function () {
 
     const containerFiltros = document.getElementById('filtros-api');
