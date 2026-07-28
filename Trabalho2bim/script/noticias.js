@@ -1,5 +1,6 @@
 let categoriaAtiva = '';
 
+// Retorna a imagem da notícia: usa a imagem definida por ela ou uma imagem padrão de acordo com a categoria
 function imagemNoticia(noticia) {
     if (noticia.imagem) return noticia.imagem;
     const imagens = {
@@ -10,6 +11,7 @@ function imagemNoticia(noticia) {
     return imagens[noticia.categoria] || 'https://placehold.co/600x200/c0392b/white?text=FutNews';
 }
 
+// Monta o HTML de um card de notícia para ser exibido nas listas
 function montarCard(n) {
     return `
         <div class="col-12 col-md-4 mb-4">
@@ -26,6 +28,7 @@ function montarCard(n) {
     `;
 }
 
+// Busca as notícias no localStorage, aplica filtro de categoria e/ou busca por texto, e exibe a lista resultante
 function carregarNoticias(termoBusca = '', categoria = '') {
     const lista = document.getElementById('lista-noticias');
     if (!lista) return;
@@ -56,6 +59,7 @@ function carregarNoticias(termoBusca = '', categoria = '') {
     });
 }
 
+// Pega o texto digitado no campo de busca e recarrega a lista de notícias filtrada por ele
 function buscarNoticias() {
     const termo = document.getElementById('campoBusca').value.trim();
     categoriaAtiva = '';
@@ -63,12 +67,14 @@ function buscarNoticias() {
     document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('ativo'));
 }
 
+// Filtra a lista de notícias pela categoria escolhida no menu lateral
 function filtrarCategoria(categoria) {
     categoriaAtiva = categoria;
     document.getElementById('campoBusca').value = '';
     carregarNoticias('', categoria);
 }
 
+// Monta a página inicial: a barra de últimas notícias, a notícia em destaque e as notícias por categoria
 function carregarHome() {
     const noticias = JSON.parse(localStorage.getItem('noticias')) || [];
 
@@ -119,6 +125,7 @@ function carregarHome() {
     }
 }
 
+// Quando a página carrega: liga a tecla Enter no campo de busca e já exibe as notícias (tanto na lista quanto na home)
 document.addEventListener('DOMContentLoaded', function () {
     const campoBusca = document.getElementById('campoBusca');
     if (campoBusca) {
